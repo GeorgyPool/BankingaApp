@@ -8,7 +8,8 @@ authors = [
 requires-python = ">=3.14"
 dependencies = [
     "pandas (>=3.0.3,<4.0.0)",
-    "openpyxl (>=3.1.5,<4.0.0)"
+    "openpyxl (>=3.1.5,<4.0.0)",
+    "requests (>=2.34.2,<3.0.0)"
 ]
 
 
@@ -27,3 +28,28 @@ dev = [
     "pytest (>=9.0.3,<10.0.0)",
     "pytest-cov (>=7.1.0,<8.0.0)"
 ]
+
+[tool.mypy]
+python_version = "3.14"
+disallow_untyped_defs = false
+warn_return_any = true
+show_error_codes = true
+
+[tool.black]
+line-length = 119
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | migrations  # исключаем миграции БД
+)/
+'''
