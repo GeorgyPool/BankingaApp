@@ -10,10 +10,10 @@ time = datetime.datetime.now()
 time_str = time.strftime("%Y-%m-%d")
 
 # Настройка логов
-logger = logging.getLogger("views.py")
+logger = logging.getLogger('views.py')
 logger.setLevel(logging.DEBUG)
-file_handler = logging.FileHandler(os.path.join("..", "logs", f"{time_str}-views.log"), "w", encoding="utf-8")
-file_formater = logging.Formatter("%(asctime)s %(name)s %(levelname)s: %(message)s")
+file_handler = logging.FileHandler(os.path.join('..', 'logs/', f'{time_str}-views.log'), 'w', encoding='utf-8')
+file_formater = logging.Formatter('%(asctime)s %(name)s %(levelname)s: %(message)s')
 file_handler.setFormatter(file_formater)
 logger.addHandler(file_handler)
 
