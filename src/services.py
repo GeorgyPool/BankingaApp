@@ -46,4 +46,4 @@ def search_category_and_description(search_str: str):
 
 
 if __name__ == "__main__":
-    print(search_category_and_description("магнит"))
+    print(search_category_and_description("Супермаркеты"))
