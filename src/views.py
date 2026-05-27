@@ -10,10 +10,10 @@ time = datetime.datetime.now()
 time_str = time.strftime("%Y-%m-%d")
 
 # Настройка логов
-logger = logging.getLogger('views.py')
+logger = logging.getLogger("views.py")
 logger.setLevel(logging.DEBUG)
-file_handler = logging.FileHandler(os.path.join('..', 'logs/', f'{time_str}-views.log'), 'w', encoding='utf-8')
-file_formater = logging.Formatter('%(asctime)s %(name)s %(levelname)s: %(message)s')
+file_handler = logging.FileHandler(os.path.join("..", "logs/", f"{time_str}-views.log"), "w", encoding="utf-8")
+file_formater = logging.Formatter("%(asctime)s %(name)s %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formater)
 logger.addHandler(file_handler)
 
@@ -120,8 +120,10 @@ def main_view(time_now: str) -> json:
         # Запуск цикла по акциям которые хотел узнать пользователь
         for stock in stock_user:
             # Обращение к внешнему АПИ с именем акции
-            url_stock = (f"https://financialmodelingprep.com/stable/profile?symbol={stock}"
-                         f"&apikey=LLPSf9IHTTHjAbZDTfRN9lqtUdv2uUem")
+            url_stock = (
+                f"https://financialmodelingprep.com/stable/profile?symbol={stock}"
+                f"&apikey=LLPSf9IHTTHjAbZDTfRN9lqtUdv2uUem"
+            )
             logger.info(f"Обращение к API для информации об акциях {stock}")
             response_stock = requests.get(url=url_stock, timeout=10)
             # Если статус код == 200, преобразуем полученные данные в json
