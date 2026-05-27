@@ -1,3 +1,4 @@
+import csv
 import datetime
 import logging
 import os
@@ -17,6 +18,20 @@ file_handler.setFormatter(file_formate)
 logger.addHandler(file_handler)
 
 
+def records(name_file: Optional[str]= None):
+    def report_decorator(func):
+        def wrapper(*arg, **kwargs):
+            if name_file:
+                str_name_file = f"{name_file}-{time_str}"
+            else:
+                str_name_file = f"report-{time_str}"
+            result = func(*arg, **kwargs)
+            result.to_csv(f"../data/{str_name_file}.csv", index=False, encoding="utf-8")
+        return wrapper
+    return report_decorator
+
+
+@records()
 def spending_by_category(transactions: pd.DataFrame, category: str, date: Optional[str] = None) -> pd.DataFrame:
     """Функция возвращает траты по заданной категории за
     последние три месяца (от переданной даты)"""
