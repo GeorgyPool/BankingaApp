@@ -9,6 +9,9 @@ from dateutil.relativedelta import relativedelta
 time = datetime.datetime.now()
 time_str = time.strftime("%Y-%m-%d")
 
+log_dir = os.path.join("..", "logs")
+os.makedirs(log_dir, exist_ok=True)
+
 logger = logging.getLogger("report.py")
 logger.setLevel(logging.DEBUG)
 file_handler = logging.FileHandler(os.path.join("..", "logs/", f"{time_str}-report.log"), "w", encoding="utf-8")
@@ -32,7 +35,7 @@ def records(name_file: Optional[str] = None):
     return report_decorator
 
 
-@records()
+# @records()
 def spending_by_category(transactions: pd.DataFrame, category: str, date: Optional[str] = None) -> pd.DataFrame:
     """Функция возвращает траты по заданной категории за
     последние три месяца (от переданной даты)"""
@@ -59,7 +62,8 @@ def spending_by_category(transactions: pd.DataFrame, category: str, date: Option
         logger.info("Список пуст")
         logger.info("Завершение функции")
         return pd.DataFrame({"Результат": ["Ничего не найдено"]})
-    logger.info("Список успешно отсортирован")
-    logger.info("Успешное завершение функции")
-    result = filtered.groupby("Категория", as_index=False)["Сумма операции"].sum()
-    return result
+    else:
+        logger.info("Список успешно отсортирован")
+        logger.info("Успешное завершение функции")
+        result = filtered.groupby("Категория", as_index=False)["Сумма операции"].sum()
+        return result

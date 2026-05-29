@@ -1,12 +1,15 @@
 import datetime
 import json
 import logging
-import os.path
+import os
 
 import pandas as pd
 
 time = datetime.datetime.now()
 time_str = time.strftime("%Y-%m-%d")
+
+logs_dr = os.path.join("..", "logs")
+os.makedirs(logs_dr, exist_ok=True)
 
 logger = logging.getLogger("services.py")
 logger.setLevel(logging.DEBUG)
